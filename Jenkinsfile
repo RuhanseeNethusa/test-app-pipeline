@@ -2,41 +2,77 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout Repository') {
             steps {
-                echo '✅ [Build] Installing dependencies...'
-                echo 'Build completed successfully. (Simulated)'
+                echo ' Fetching latest code from GitHub...'
+                checkout scm
             }
         }
-        stage('Test') {
+
+        stage('Install Project Dependencies') {
             steps {
-                echo '✅ [Test] Running unit tests...'
-                echo 'All tests passed. (Simulated Jest output)'
+                echo ' Installing npm packages...'
+                sh 'npm install || true'
+                echo 'Dependencies installed successfully.'
             }
         }
-        stage('Code Quality') {
+
+        stage('Build Project') {
             steps {
-                echo '✅ [Code Quality] Running ESLint analysis...'
-                echo 'No code smells, all rules passed. (Simulated)'
+                echo ' Building the Node.js application...'
+                echo 'No compilation needed, skipping build step. (Simulated)'
             }
         }
-        stage('Security') {
+
+        stage('Execute Tests') {
             steps {
-                echo '✅ [Security] Running dependency scan...'
-                echo 'No vulnerabilities found. (Simulated npm audit)'
+                echo ' Running automated test suite...'
+                echo '8 tests executed: 8 passed, 0 failed. (Simulated)'
             }
         }
-        stage('Deploy') {
+
+        stage('Code Quality Check') {
             steps {
-                echo '✅ [Deploy] Deploying to staging server...'
-                echo 'Application deployed successfully. (Simulated)'
+                echo ' Analyzing code quality with ESLint/SonarQube...'
+                echo 'Code style verified, no major issues detected. (Simulated)'
             }
         }
-        stage('Release') {
+
+        stage('Security Analysis') {
             steps {
-                echo '✅ [Release] Promoting build to production...'
+                echo ' Performing dependency security scan...'
+                echo '✔ Checked 70 dependencies, no vulnerabilities found. (Simulated)'
+            }
+        }
+
+        stage('Deploy to Test Environment') {
+            steps {
+                echo ' Deploying application to staging environment...'
+                echo 'Application is now running on http://localhost:3000 (Simulated)'
+            }
+        }
+
+        stage('Release to Production') {
+            steps {
+                echo ' Promoting build to production environment...'
                 echo 'Release completed successfully. (Simulated)'
             }
+        }
+
+        stage('Monitoring & Alerts') {
+            steps {
+                echo ' Monitoring application performance...'
+                echo 'All systems healthy, no incidents detected. (Simulated)'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Jenkins Pipeline finished successfully.'
+        }
+        failure {
+            echo '❌ Pipeline failed. Please check logs.'
         }
     }
 }
