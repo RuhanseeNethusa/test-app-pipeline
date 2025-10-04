@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "npx jest"
-  },
+  "start": "node index.js",
+  "test": "node ./node_modules/jest/bin/jest.js --runInBand"
+}
+
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
